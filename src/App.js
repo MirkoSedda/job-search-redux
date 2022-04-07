@@ -1,20 +1,24 @@
-import 'bootstrap/dist/css/bootstrap.min.css'
-import './App.css'
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import Search from './components/Search'
-import CompanySearchResults from './components/CompanySearchResults'
-import FavoriteResults from './components/FavoriteResults'
+import "bootstrap/dist/css/bootstrap.min.css";
+import "./App.css";
+import Search from "./components/Search";
+import CompanySearchResults from "./components/CompanySearchResults";
+import Favourites from "./components/Favourites";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import store from "./store";
+import { Provider } from "react-redux";
 
 function App() {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Search />} />
-        <Route path="/:companyName" element={<CompanySearchResults />} />
-        <Route path="/:favorites" element={<FavoriteResults />} />
-      </Routes>
-    </BrowserRouter>
-  )
+    <Provider store={store}>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Search />} />
+          <Route path="/favourites" element={<Favourites />} />
+          <Route path="/:companyName" element={<CompanySearchResults />} />
+        </Routes>
+      </BrowserRouter>
+    </Provider>
+  );
 }
 
-export default App
+export default App;
