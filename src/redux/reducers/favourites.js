@@ -1,4 +1,4 @@
-import initialState from "../store"
+import { initialState } from "../store"
 import { ADD_TO_FAV, REMOVE_FROM_FAV } from "../actions"
 
 export default function favouritesReducer(

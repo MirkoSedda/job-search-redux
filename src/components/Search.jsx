@@ -6,7 +6,9 @@ import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { fetchJobs } from '../redux/actions'
 
-const mapStateToProps = (state) => ({})
+const mapStateToProps = (state) => ({
+    jobs: state.jobs
+})
 
 const mapDispatchToProps = (dispatch) => ({
     fetchJobs: (url, query) => dispatch(fetchJobs(url, query))
@@ -16,7 +18,7 @@ class Search extends React.Component {
 
     state = {
         query: '',
-        jobs: []
+        jobs: [],
     }
 
     url = 'https://strive-jobs-api.herokuapp.com/jobs?search='
