@@ -14,10 +14,10 @@ const CompanySearchResults = () => {
     //eslint-disable-next-line
   }, []);
 
-  const baseEndpoint = "https://strive-jobs-api.herokuapp.com/jobs?company=";
+  const url = "https://strive-jobs-api.herokuapp.com/jobs?company=";
 
   const getJobs = async () => {
-    const response = await fetch(baseEndpoint + params.companyName);
+    const response = await fetch(url + params.companyName);
     const { data } = await response.json();
 
     setJobs(data);
@@ -27,8 +27,8 @@ const CompanySearchResults = () => {
     <Container>
       <Row>
         <Col>
-          {jobs.map((jobData) => (
-            <Job key={uniqid()} data={jobData} />
+          {jobs.map((job) => (
+            <Job key={uniqid()} data={job} />
           ))}
         </Col>
       </Row>

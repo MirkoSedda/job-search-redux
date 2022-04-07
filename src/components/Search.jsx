@@ -3,15 +3,23 @@ import { Container, Row, Col, Form } from 'react-bootstrap'
 import JobResult from './JobResult'
 import uniqid from 'uniqid'
 import { Link } from 'react-router-dom'
+import { connect } from 'react-redux'
+import { fetchJobs } from '../redux/actions'
 
-export default class Search extends React.Component {
+const mapStateToProps = (state) => ({})
+
+const mapDispatchToProps = (dispatch) => ({
+    fetchJobs: (url, query) => dispatch(fetchJobs(url, query))
+})
+
+class Search extends React.Component {
 
     state = {
         query: '',
         jobs: []
     }
 
-    baseEndpoint = 'https://strive-jobs-api.herokuapp.com/jobs?search='
+    url = 'https://strive-jobs-api.herokuapp.com/jobs?search='
 
 
     handleChange = (e) => {
@@ -20,13 +28,7 @@ export default class Search extends React.Component {
 
     handleSubmit = async (e) => {
         e.preventDefault()
-        const response = await fetch(this.baseEndpoint + this.state.query + '&limit=20')
-        if (!response.ok) {
-            alert('Error fetching results')
-            return
-        }
-        const { data } = await response.json()
-        this.setState({ jobs: data })
+        this.props.fetchJobs(this.url + this.state.query)
     }
 
     render() {
@@ -44,7 +46,7 @@ export default class Search extends React.Component {
                     </Col>
                     <Col xs={10} className='mx-auto mb-5'>
                         {
-                            this.state.jobs.map(jobData => <JobResult key={uniqid()} data={jobData} />)
+                            this.props.jobs.items.map(job => <JobResult key={uniqid()} data={job} />)
                         }
                     </Col>
                 </Row>
@@ -52,3 +54,5 @@ export default class Search extends React.Component {
         )
     }
 }
+
+export default connect(mapStateToProps, mapDispatchToProps)(Search)

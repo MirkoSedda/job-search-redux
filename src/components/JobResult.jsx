@@ -2,10 +2,10 @@ import React from 'react'
 import { Row, Col } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import { Star, StarFill } from 'react-bootstrap-icons'
-import { addToFav, removeFromFav } from '../store/actions'
+import { addToFav, removeFromFav } from '../redux/actions'
 import { connect } from 'react-redux'
 
-const mapStateToProps = s => s
+const mapStateToProps = state => ({})
 
 const mapDispatchToProps = (dispatch) => ({
     addToFavourites: (company) => dispatch(addToFav(company)),
@@ -18,9 +18,9 @@ function JobResult({ data, favourites, addToFavourites, removeFromFavourites }) 
     const isFav = favourites.includes(data.company_name)
     console.log(isFav, favourites)
     const toggleFavourite = () => {
-        isFav 
-            ? removeFromFavourites(data.company_name) 
-            : addToFavourites(data.company_name) 
+        isFav
+            ? removeFromFavourites(data.company_name)
+            : addToFavourites(data.company_name)
     }
 
     return (
@@ -28,7 +28,7 @@ function JobResult({ data, favourites, addToFavourites, removeFromFavourites }) 
             <Col xs={3} className="d-flex">
                 {
                     isFav
-                        ? <StarFill color="gold" size={16} className="me-4 my-auto" onClick={toggleFavourite}/>
+                        ? <StarFill color="gold" size={16} className="me-4 my-auto" onClick={toggleFavourite} />
                         : <Star color="gold" size={16} className="me-4 my-auto" onClick={toggleFavourite} />
                 }
                 <Link to={`/${data.company_name}`}>{data.company_name}</Link>
