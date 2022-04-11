@@ -7,7 +7,7 @@ import { Container, Row, Col, Form } from "react-bootstrap";
 import JobResult from "./JobResult";
 import { fetchJobs } from "../store/actions";
 
-const MainSearch = () => {
+export default function MainSearch() {
   const [query, setQuery] = useState("");
 
   const dispatch = useDispatch();
@@ -48,4 +48,3 @@ const MainSearch = () => {
   );
 };
 
-export default MainSearch;

@@ -4,7 +4,7 @@ import Job from "./Job";
 import uniqid from "uniqid";
 import { useParams } from "react-router-dom";
 
-const CompanySearchResults = () => {
+export default function CompanySearchResults() {
   const [jobs, setJobs] = useState([]);
 
   const params = useParams();
@@ -36,4 +36,3 @@ const CompanySearchResults = () => {
   );
 };
 
-export default CompanySearchResults;

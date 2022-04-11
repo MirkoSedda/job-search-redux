@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import { Star, StarFill } from "react-bootstrap-icons";
 import { addToFav, removeFromFav } from "../store/actions";
 
-function JobResult({ data }) {
+export default function JobResult({ data }) {
   const favourites = useSelector((state) => state.favourites);
   const dispatch = useDispatch();
 
@@ -49,4 +49,3 @@ function JobResult({ data }) {
   );
 }
 
-export default JobResult;
