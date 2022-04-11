@@ -1,36 +1,29 @@
-import React from 'react'
-import { Container, Row, Col, ListGroup, ListGroupItem } from 'react-bootstrap'
-import { StarFill } from 'react-bootstrap-icons'
-import { connect } from 'react-redux'
-import { removeFromFav } from '../redux/actions'
+import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Container, Row, Col, ListGroup, ListGroupItem } from "react-bootstrap";
+import { StarFill } from "react-bootstrap-icons";
+import { removeFromFav } from "../store/actions";
 
-const mapStateToProps = (state) => ({})
+const Favourites = () => {
+  const dispatch = useDispatch();
+  const favourites = useSelector((state) => state.favourites);
 
-const mapDispatchToProps = (dispatch) => ({
-    removeFromFav: (favourite) => { dispatch(removeFromFav(favourite)) }
-})
+  return (
+    <Container>
+      <Row>
+        <Col xs={12}>
+          <ListGroup>
+            {favourites.elements.map((f) => (
+              <ListGroupItem>
+                <StarFill onClick={() => dispatch(removeFromFav(f))} />
+                <span>{f}</span>
+              </ListGroupItem>
+            ))}
+          </ListGroup>
+        </Col>
+      </Row>
+    </Container>
+  );
+};
 
-class Favourites extends React.Component {
-    render() {
-        return (
-            <Container>
-                <Row>
-                    <Col xs={12}>
-                        <ListGroup>
-                            {
-                                this.props.favourites?.items.map(favourite => (
-                                    <ListGroupItem>
-                                        <StarFill onClick={() => this.props.removeFromFav(favourite)} />
-                                        <span>{favourite}</span>
-                                    </ListGroupItem>
-                                ))
-                            }
-                        </ListGroup>
-                    </Col>
-                </Row>
-            </Container>
-        )
-    }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Favourites)
+export default Favourites;

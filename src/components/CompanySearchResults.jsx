@@ -11,13 +11,13 @@ const CompanySearchResults = () => {
 
   useEffect(() => {
     getJobs();
-    //eslint-disable-next-line
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const url = "https://strive-jobs-api.herokuapp.com/jobs?company=";
+  const baseEndpoint = "https://strive-jobs-api.herokuapp.com/jobs?company=";
 
   const getJobs = async () => {
-    const response = await fetch(url + params.companyName);
+    const response = await fetch(baseEndpoint + params.companyName);
     const { data } = await response.json();
 
     setJobs(data);
@@ -27,8 +27,8 @@ const CompanySearchResults = () => {
     <Container>
       <Row>
         <Col>
-          {jobs.map((job) => (
-            <Job key={uniqid()} data={job} />
+          {jobs.map((jobData) => (
+            <Job key={uniqid()} data={jobData} />
           ))}
         </Col>
       </Row>
